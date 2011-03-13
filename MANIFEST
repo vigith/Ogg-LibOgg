@@ -1,0 +1,8 @@
+Changes
+LibOgg.xs
+Makefile.PL
+MANIFEST
+ppport.h
+README
+t/Ogg-LibOgg.t
+lib/Ogg/LibOgg.pm
