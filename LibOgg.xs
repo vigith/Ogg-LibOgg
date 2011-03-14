@@ -37,7 +37,7 @@ Creates an Ogg Packet.
   Void
 
 @Output:
-  Memory address
+  Memory address of Ogg Packet.
 
 =cut
 void
@@ -56,7 +56,7 @@ Creates an Ogg Stream State.
   Void
 
 @Output:
-  Memory address
+  Memory address of Ogg Stream State.
 
 =cut
 void
@@ -76,7 +76,7 @@ Creates an Ogg Page.
   Void
 
 @Output:
-  Memory address
+  Memory address of Ogg Page.
 
 =cut
 void
@@ -96,7 +96,7 @@ Creates an Ogg Sync State.
   Void
 
 @Output:
-  Memory address
+  Memory address of Ogg Sync State.
 
 =cut
 void
