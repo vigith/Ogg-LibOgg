@@ -1,6 +1,6 @@
 package Ogg::LibOgg;
 
-use 5.008009;
+use 5.008;
 use strict;
 use warnings;
 
@@ -101,9 +101,8 @@ Please read LibOgg.xs to understand the implementation.
 
 =head2 EXPORT
 
-None by default.
-
-Please use Ogg::LibOgg ':all' to export everything to the current namespace
+None by default. Please use Ogg::LibOgg ':all' to export everything to the current 
+namespace.
 
 =head1 Functions (malloc)
 

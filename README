@@ -23,15 +23,26 @@ To install this module type the following:
 
 DEPENDENCIES
 
-This module requires these other modules and libraries:
+This module requires NO other modules but DEPENDS on libogg library.
 
-  blah blah blah
+You will have to install libogg and libogg-devel in Linux and only 
+libogg in Mac to make this module work (please use your discretion). 
+
+Mac OS:
+sudo port install libogg
+
+Linux:
+sudo yum install libogg
+sudo yum install libogg-devel
+
+Windows:
+Not Sure, never tested or tried :-)
 
 COPYRIGHT AND LICENCE
 
 Put the correct copyright and licence information here.
 
-Copyright (C) 2011 by Vigith Maurice
+Copyright (C) 2011 by Vigith Maurice <vigith@cpan.org> 
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.8.9 or,

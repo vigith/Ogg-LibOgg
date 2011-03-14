@@ -13,7 +13,7 @@
 #     ABSTRACT_FROM => q[lib/Ogg/LibOgg.pm]
 #     AUTHOR => q[Vigith Maurice <vigith@nonet>]
 #     DEFINE => q[]
-#     INC => q[-I/opt/local/include]
+#     INC => q[-I/opt/local/include -I/usr/local/lib -I/usr/lib]
 #     LIBS => [q[-logg]]
 #     NAME => q[Ogg::LibOgg]
 #     PREREQ_PM => {  }
@@ -148,7 +148,7 @@ BASEEXT = LibOgg
 PARENT_NAME = Ogg
 DLBASE = $(BASEEXT)
 VERSION_FROM = lib/Ogg/LibOgg.pm
-INC = -I/opt/local/include
+INC = -I/opt/local/include -I/usr/local/lib -I/usr/lib
 DEFINE = 
 OBJECT = $(BASEEXT)$(OBJ_EXT)
 LDFROM = $(OBJECT)
@@ -571,7 +571,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '--- #YAML:1.0' > META_new.yml
 	$(NOECHO) $(ECHO) 'name:               Ogg-LibOgg' >> META_new.yml
 	$(NOECHO) $(ECHO) 'version:            0.01' >> META_new.yml
-	$(NOECHO) $(ECHO) 'abstract:           Perl extension for blah blah blah' >> META_new.yml
+	$(NOECHO) $(ECHO) 'abstract:           XS Code for Ogg bindings for Perl.' >> META_new.yml
 	$(NOECHO) $(ECHO) 'author:' >> META_new.yml
 	$(NOECHO) $(ECHO) '    - Vigith Maurice <vigith@nonet>' >> META_new.yml
 	$(NOECHO) $(ECHO) 'license:            unknown' >> META_new.yml
@@ -933,7 +933,7 @@ testdb_static :: pure_all $(MAP_TARGET)
 ppd :
 	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="0,01,0,0">' > $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <TITLE>$(DISTNAME)</TITLE>' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '    <ABSTRACT>Perl extension for blah blah blah</ABSTRACT>' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '    <ABSTRACT>XS Code for Ogg bindings for Perl.</ABSTRACT>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <AUTHOR>Vigith Maurice &lt;vigith@nonet&gt;</AUTHOR>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <OS NAME="$(OSNAME)" />' >> $(DISTNAME).ppd

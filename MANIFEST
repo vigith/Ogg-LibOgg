@@ -4,5 +4,7 @@ Makefile.PL
 MANIFEST
 ppport.h
 README
+typemap
 t/Ogg-LibOgg.t
+t/test.ogg
 lib/Ogg/LibOgg.pm
