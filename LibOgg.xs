@@ -1008,6 +1008,39 @@ Ogg_LibOgg_ogg_stream_packetpeek(os, op)
     RETVAL
 
 
+=head1 Functions (Miscellaneous)
+
+Functions to manipulate C Structures
+
+=cut
+
+=head1 get_ogg_page
+
+Gets the data contained in ogg_page and return as a hash reference.
+
+-Input:
+  ogg_page
+
+-Output:
+  hashref
+
+=cut
+HV *
+Ogg_LibOgg_get_ogg_page(og)
+    int		og
+  PREINIT:
+    ogg_page *_og;
+  CODE:
+    _og = INT2PTR(ogg_page *, og);
+    RETVAL = newHV();
+    sv_2mortal((SV*)RETVAL);
+    hv_store(RETVAL, "header", strlen("header"), newSVpv((char *)_og->header, _og->header_len), 0);
+    hv_store(RETVAL, "header_len", strlen("header_len"), newSViv(_og->header_len), 0);
+    hv_store(RETVAL, "body", strlen("body"), newSVpv((char *)_og->body, _og->body_len), 0);
+    hv_store(RETVAL, "body_len", strlen("body_len"), newSViv(_og->body_len), 0);
+  OUTPUT:
+    RETVAL
+
 
 =head1 CAVEATS
 

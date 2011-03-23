@@ -2,7 +2,7 @@
 # `make test'. After `make install' it should work as `perl Ogg-LibOgg.t'
 
 
-use Test::More tests => 38;
+use Test::More tests => 39;
 BEGIN { use_ok('Ogg::LibOgg') };
 
 
@@ -110,6 +110,8 @@ ok(Ogg::LibOgg::ogg_sync_check($oy) == 0, "Ogg Sync Check");
 ## Ogg Sync Pageseek
 ok(Ogg::LibOgg::ogg_sync_pageseek($oy, $og) != 0, "Ogg Sync Pageseek");
 
+## Get Ogg Page
+ok(ref Ogg::LibOgg::get_ogg_page($og) eq 'HASH', "Get Ogg Page");
 
 ## CLEAN-UPS ##
 
