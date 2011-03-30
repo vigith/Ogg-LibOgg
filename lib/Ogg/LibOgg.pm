@@ -46,6 +46,7 @@ our @EXPORT_OK =
        ogg_stream_pagein
        ogg_stream_packetout
        ogg_stream_packetpeek
+       get_ogg_page
     );
 
 # This allows declaration	use Ogg::LibOgg ':all';

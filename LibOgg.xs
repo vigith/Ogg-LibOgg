@@ -1033,7 +1033,7 @@ Ogg_LibOgg_get_ogg_page(og)
   CODE:
     _og = INT2PTR(ogg_page *, og);
     RETVAL = newHV();
-    sv_2mortal((SV*)RETVAL);
+    sv_2mortal((SV*)RETVAL);	/* convert the hash inside the RETVAL to a mortal */
     hv_store(RETVAL, "header", strlen("header"), newSVpv((char *)_og->header, _og->header_len), 0);
     hv_store(RETVAL, "header_len", strlen("header_len"), newSViv(_og->header_len), 0);
     hv_store(RETVAL, "body", strlen("body"), newSVpv((char *)_og->body, _og->body_len), 0);
