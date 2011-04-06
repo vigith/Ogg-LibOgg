@@ -46,6 +46,7 @@ our @EXPORT_OK =
        ogg_stream_pagein
        ogg_stream_packetout
        ogg_stream_packetpeek
+       get_ogg_page
     );
 
 # This allows declaration	use Ogg::LibOgg ':all';
@@ -54,7 +55,7 @@ our %EXPORT_TAGS = ( 'all' => \@EXPORT_OK );
 ## We export none by default
 our @EXPORT = qw();
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 ## Load the XS code
 require XSLoader;
@@ -113,10 +114,10 @@ Memory Allocation for the Ogg Structures
 
 Creates an Ogg Packet.
 
-@Input:
+-Input:
   Void
 
-@Output:
+-Output:
   Memory address of Ogg Packet.
 
 
@@ -124,10 +125,10 @@ Creates an Ogg Packet.
 
 Creates an Ogg Stream State.
 
-@Input:
+-Input:
   Void
 
-@Output:
+-Output:
   Memory address of Ogg Stream State.
 
 
@@ -135,10 +136,10 @@ Creates an Ogg Stream State.
 
 Creates an Ogg Page.
 
-@Input:
+-Input:
   Void
 
-@Output:
+-Output:
   Memory address of Ogg Page.
 
 
@@ -146,10 +147,10 @@ Creates an Ogg Page.
 
 Creates an Ogg Sync State.
 
-@Input:
+-Input:
   Void
 
-@Output:
+-Output:
   Memory address og Ogg Sync State.
 
 
@@ -160,13 +161,13 @@ Creates an Ogg Sync State.
 
 This function is used to initialize an ogg_stream_state struct and 
 allocates appropriate memory in preparation for encoding or decoding. 
-(http://www.xiph.org/ogg/doc/libogg/ogg_stream_init.html)
+L<http://www.xiph.org/ogg/doc/libogg/ogg_stream_init.html>
 
-@Input:
+-Input:
   ogg_stream_state (memory addr)
   serial number
 
-@Output:
+-Output:
    0 if successful
   -1 if unsuccessful
 
@@ -186,12 +187,12 @@ and inserts them into an ogg_page.
 	ogg_sync_wrote(&oy, bytes);
   }
 
-@Input:
+-Input:
   FILE *
   ogg_sync_state
   ogg_page
 
-@Output:
+-Output:
   -1 buffer overflow or internal error (status of ogg_sync_wrote)
    0 all other cases
 
@@ -199,12 +200,12 @@ and inserts them into an ogg_page.
 =head2 ogg_page_bos
 
 Indicates whether this page is at the beginning of the logical bitstream.
-(http://www.xiph.org/ogg/doc/libogg/ogg_page_bos.html)
+L<http://www.xiph.org/ogg/doc/libogg/ogg_page_bos.html>
 
-@Input:
+-Input:
   ogg_page
 
-@Output:
+-Output:
   > 0 if this page is the beginning of a bitstream.
   0 if this page is from any other location in the stream.
 
@@ -212,12 +213,12 @@ Indicates whether this page is at the beginning of the logical bitstream.
 =head2 ogg_page_eos
 
 Indicates whether this page is at the end of the logical bitstream. 
-(http://www.xiph.org/ogg/doc/libogg/ogg_page_eos.html)
+L<http://www.xiph.org/ogg/doc/libogg/ogg_page_eos.html>
 
-@Input:
+-Input:
   ogg_page
 
-@Output:
+-Output:
   > 0 if this page is the beginning of a bitstream.
   0 if this page is from any other location in the stream.
 
@@ -225,40 +226,40 @@ Indicates whether this page is at the end of the logical bitstream.
 =head2 ogg_page_checksum_set
 
 Checksums an ogg_page. 
-(http://www.xiph.org/ogg/doc/libogg/ogg_page_checksum_set.html)
+L<http://www.xiph.org/ogg/doc/libogg/ogg_page_checksum_set.html>
 
 (Not *SURE* why in the ogg official doc, they have given the
 function definition as 'int ogg_page_checksum_set(og)', it should
 be actuall 'void ogg_page_checksum_set(og)').
 
-@Input:
+-Input:
   ogg_page
 
-@Output:
+-Output:
   void
 
 
 =head2 ogg_page_continued
 
 Indicates whether this page contains packet data which has been continued from 
-the previous page. (http://www.xiph.org/ogg/doc/libogg/ogg_page_continued.html)
+the previous page. L<http://www.xiph.org/ogg/doc/libogg/ogg_page_continued.html>
 
-@Input:
+-Input:
   ogg_page
 
-@Output:
+-Output:
   int
 
 
 =head2 ogg_page_granulepos
 
 Returns the exact granular position of the packet data contained at the end of 
-this page. (http://www.xiph.org/ogg/doc/libogg/ogg_page_granulepos.html)
+this page. L<http://www.xiph.org/ogg/doc/libogg/ogg_page_granulepos.html>
 
-@Input:
+-Input:
   ogg_page
 
-@Output:
+-Output:
   n is the specific last granular position of the decoded data contained in the page.
 
 
@@ -266,12 +267,12 @@ this page. (http://www.xiph.org/ogg/doc/libogg/ogg_page_granulepos.html)
 
 Returns the number of packets that are completed on this page.
 
-(http://www.xiph.org/ogg/doc/libogg/ogg_page_packets.html)
+L<http://www.xiph.org/ogg/doc/libogg/ogg_page_packets.html>
 
-@Input:
+-Input:
   ogg_page
 
-@Output:
+-Output:
   1 If a page consists of a packet begun on a previous page, 
   != 0 a new packet begun (but not completed) on this page,
 
@@ -282,12 +283,12 @@ Returns the number of packets that are completed on this page.
 =head2 ogg_page_pageno
 
 Returns the sequential page number. 
-(http://www.xiph.org/ogg/doc/libogg/ogg_page_pageno.html)
+L<http://www.xiph.org/ogg/doc/libogg/ogg_page_pageno.html>
 
-@Input:
+-Input:
   ogg_page
 
-@Output:
+-Output:
   n, is the page number for this page.
 
 
@@ -295,12 +296,12 @@ Returns the sequential page number.
 
 Returns the unique serial number for the logical bitstream of this page. 
 Each page contains the serial number for the logical bitstream that it belongs to. 
-(http://www.xiph.org/ogg/doc/libogg/ogg_page_serialno.html)
+L<http://www.xiph.org/ogg/doc/libogg/ogg_page_serialno.html>
 
-@Input:
+-Input:
   ogg_page
 
-@Output:
+-Output:
   n, where n is the serial number for this page.
 
 
@@ -308,24 +309,24 @@ Each page contains the serial number for the logical bitstream that it belongs t
 
 This function clears and frees the internal memory used by the ogg_stream_state 
 struct, but does not free the structure itself.
-(http://www.xiph.org/ogg/doc/libogg/ogg_stream_clear.html)
+L<http://www.xiph.org/ogg/doc/libogg/ogg_stream_clear.html>
 
-@Input:
+-Input:
   ogg_stream_state
 
-@Output:
+-Output:
   0 is always returned
 
 
 =head2 ogg_stream_reset
 
 This function sets values in the ogg_stream_state struct back to initial values. 
-(http://www.xiph.org/ogg/doc/libogg/ogg_stream_reset.html)
+L<http://www.xiph.org/ogg/doc/libogg/ogg_stream_reset.html>
 
-@Input:
+-Input:
   ogg_stream_state
 
-@Output:
+-Output:
   0, success
   != 0, internal error
 
@@ -333,13 +334,13 @@ This function sets values in the ogg_stream_state struct back to initial values.
 =head2 ogg_stream_reset_serialno
 
 Similar to ogg_stream_reset, but it also it sets the stream serial number to 
-the given value. (http://www.xiph.org/ogg/doc/libogg/ogg_stream_reset_serialno.html)
+the given value. L<http://www.xiph.org/ogg/doc/libogg/ogg_stream_reset_serialno.html>
 
-@Input:
+-Input:
   ogg_stream_state
   serialno
 
-@Output:
+-Output:
   0, success
   != 0, internal error
 
@@ -347,24 +348,24 @@ the given value. (http://www.xiph.org/ogg/doc/libogg/ogg_stream_reset_serialno.h
 =head2 ogg_stream_destroy
 
 This function frees the internal memory used by the ogg_stream_state struct as well as 
-the structure itself. (http://www.xiph.org/ogg/doc/libogg/ogg_stream_destroy.html)
+the structure itself. L<http://www.xiph.org/ogg/doc/libogg/ogg_stream_destroy.html>
 
-@Input:
+-Input:
   ogg_stream_state
 
-@Output:
+-Output:
   0, always
 
 
 =head2 ogg_stream_check
 
 This function is used to check the error or readiness condition of an ogg_stream_state 
-structure. (http://www.xiph.org/ogg/doc/libogg/ogg_stream_check.html)
+structure. L<http://www.xiph.org/ogg/doc/libogg/ogg_stream_check.html>
 
-@Input:
+-Input:
   ogg_stream_state
 
-@Output:
+-Output:
   0, if the ogg_stream_state structure is initialized and ready.
   != 0, never initialized, or if an unrecoverable internal error occurred 
 
@@ -372,12 +373,12 @@ structure. (http://www.xiph.org/ogg/doc/libogg/ogg_stream_check.html)
 =head2 ogg_page_version
 
 This function returns the version of ogg_page used in this page. 
-(http://www.xiph.org/ogg/doc/libogg/ogg_page_version.html)
+L<http://www.xiph.org/ogg/doc/libogg/ogg_page_version.html>
 
-@Input:
+-Input:
   ogg_page
 
-@Output:
+-Output:
   n, is the version number (for current ogg, 0 is always returned,
      else error)
 
@@ -386,9 +387,9 @@ This function returns the version of ogg_page used in this page.
 
 his function clears the memory used by the ogg_packet struct, but does not 
 free the structure itself. Don't call it directly.
-(http://www.xiph.org/ogg/doc/libogg/ogg_packet_clear.html)
+L<http://www.xiph.org/ogg/doc/libogg/ogg_packet_clear.html>
 
-@Input:
+-Input:
   ogg_packet
 
 @Ouput:
@@ -402,13 +403,13 @@ free the structure itself. Don't call it directly.
 
 This function submits a packet to the bitstream for page encapsulation. After this 
 is called, more packets can be submitted, or pages can be written out.
-(http://www.xiph.org/ogg/doc/libogg/ogg_stream_packetin.html)
+L<http://www.xiph.org/ogg/doc/libogg/ogg_stream_packetin.html>
 
-@Input:
+-Input:
   ogg_stream_state
   ogg_packet
 
-@Output:
+-Output:
    0, on success
   -1, on internal error
 
@@ -416,13 +417,13 @@ is called, more packets can be submitted, or pages can be written out.
 =head2 ogg_stream_pageout
 
 This function forms packets into pages, this would be called after using ogg_stream_packetin().
-(http://www.xiph.org/ogg/doc/libogg/ogg_stream_pageout.html)
+L<http://www.xiph.org/ogg/doc/libogg/ogg_stream_pageout.html>
 
-@Input:
+-Input:
   ogg_stream_state
   ogg_page
 
-@Output:
+-Output:
   0, insufficient data or internal error
   != 0, page has been completed and returned.
 
@@ -431,13 +432,13 @@ This function forms packets into pages, this would be called after using ogg_str
 
 This function checks for remaining packets inside the stream and forces remaining 
 packets into a page, regardless of the size of the page.
-(http://www.xiph.org/ogg/doc/libogg/ogg_stream_flush.html)
+L<http://www.xiph.org/ogg/doc/libogg/ogg_stream_flush.html>
 
-@Input:
+-Input:
   ogg_stream_state
   ogg_page
 
-@Output:
+-Output:
   0, means that all packet data has already been flushed into pages
   != 0, means that remaining packets have successfully been flushed into the page.
 
@@ -449,12 +450,12 @@ packets into a page, regardless of the size of the page.
 
 ogg sync init, This function is used to initialize an ogg_sync_state 
 struct to a known initial value in preparation for manipulation of an 
-Ogg bitstream. (http://www.xiph.org/ogg/doc/libogg/ogg_sync_init.html)
+Ogg bitstream. L<http://www.xiph.org/ogg/doc/libogg/ogg_sync_init.html>
 
-@Input: 
+-Input: 
   ogg_sync_state (memory addr)
 
-@Output:
+-Output:
   0 (always)
 
 
@@ -462,33 +463,33 @@ Ogg bitstream. (http://www.xiph.org/ogg/doc/libogg/ogg_sync_init.html)
 
 This function is used to free the internal storage of an ogg_sync_state 
 struct and resets the struct to the initial state.
-(http://www.xiph.org/ogg/doc/libogg/ogg_sync_clear.html)
+L<http://www.xiph.org/ogg/doc/libogg/ogg_sync_clear.html>
 
-@Input:
+-Input:
   ogg_sync_state
 
-@Output:
+-Output:
   0, always
 
 
 =head2 ogg_sync_reset
 
 This function is used to reset the internal counters of the ogg_sync_state struct 
-to initial values. (http://www.xiph.org/ogg/doc/libogg/ogg_sync_reset.html)
+to initial values. L<http://www.xiph.org/ogg/doc/libogg/ogg_sync_reset.html>
 
-@Input:
+-Input:
   ogg_sync_state
 
-@Output:
+-Output:
   0, always
 
 
 =head2 ogg_sync_destroy
 
 This function is used to destroy an ogg_sync_state struct and free all memory used.
-(http://www.xiph.org/ogg/doc/libogg/ogg_sync_destroy.html)
+L<http://www.xiph.org/ogg/doc/libogg/ogg_sync_destroy.html>
 
-@Input:
+-Input:
   ogg_sync_state
 
 @Ouput:
@@ -498,12 +499,12 @@ This function is used to destroy an ogg_sync_state struct and free all memory us
 =head2 ogg_sync_check
 
 This function is used to check the error or readiness condition of an ogg_sync_state 
-structure. (http://www.xiph.org/ogg/doc/libogg/ogg_sync_check.html)
+structure. L<http://www.xiph.org/ogg/doc/libogg/ogg_sync_check.html>
 
-@Input:
+-Input:
   ogg_sync_state
 
-@Output:
+-Output:
   0, is returned if the ogg_sync_state structure is initialized and ready.
   != 0, if the structure was never initialized, or if an unrecoverable internal error
 
@@ -511,13 +512,13 @@ structure. (http://www.xiph.org/ogg/doc/libogg/ogg_sync_check.html)
 =head2 ogg_sync_buffer
 
 This function is used to provide a properly-sized buffer for writing. 
-(http://www.xiph.org/ogg/doc/libogg/ogg_sync_buffer.html)
+L<http://www.xiph.org/ogg/doc/libogg/ogg_sync_buffer.html>
 
-@Input:
+-Input:
   ogg_sync_state
   size
 
-@Output:
+-Output:
   Returns a pointer to the newly allocated buffer or NULL on error
 
 
@@ -525,13 +526,13 @@ This function is used to provide a properly-sized buffer for writing.
 
 This function is used to tell the ogg_sync_state struct how many bytes we 
 wrote into the buffer. 
-(http://www.xiph.org/ogg/doc/libogg/ogg_sync_wrote.html)
+L<http://www.xiph.org/ogg/doc/libogg/ogg_sync_wrote.html>
 
-@Input:
+-Input:
   ogg_sync_state
   bytes
 
-@Output:
+-Output:
   -1 if the number of bytes written overflows the internal storage of 
      the ogg_sync_state struct or an internal error occurred. 
    0 in all other cases.
@@ -540,13 +541,13 @@ wrote into the buffer.
 =head2 ogg_sync_pageseek
 
 This function synchronizes the ogg_sync_state struct to the next ogg_page. 
-(http://www.xiph.org/ogg/doc/libogg/ogg_sync_pageseek.html)
+L<http://www.xiph.org/ogg/doc/libogg/ogg_sync_pageseek.html>
 
-@Input:
+-Input:
   ogg_sync_state
   ogg_page
 
-@Output:
+-Output:
  -n means that we skipped n bytes within the bitstream.
   0 means that we need more data, or than an internal error occurred.
   n means that the page was synced at the current location, 
@@ -558,13 +559,13 @@ This function synchronizes the ogg_sync_state struct to the next ogg_page.
 This function takes the data stored in the buffer of the ogg_sync_state struct
 and inserts them into an ogg_page. In an actual decoding loop, this function 
 should be called first to ensure that the buffer is cleared. 
-(http://www.xiph.org/ogg/doc/libogg/ogg_sync_pageout.html). 
+L<http://www.xiph.org/ogg/doc/libogg/ogg_sync_pageout.html>
 
-@Input:
+-Input:
   ogg_sync_state
   ogg_page
 
-@Output:
+-Output:
   -1 returned if stream has not yet captured sync (bytes were skipped).
    0 returned if more data needed or an internal error occurred.
    1 indicated a page was synced and returned.
@@ -574,13 +575,13 @@ should be called first to ensure that the buffer is cleared.
 
 This function adds a complete page to the bitstream. In a typical decoding situation, 
 this function would be called after using ogg_sync_pageout to create a valid ogg_page 
-struct. (http://www.xiph.org/ogg/doc/libogg/ogg_stream_pagein.html)
+struct. L<http://www.xiph.org/ogg/doc/libogg/ogg_stream_pagein.html>
 
-@Input:
+-Input:
   ogg_stream_state
   ogg_page
 
-@Output:
+-Output:
   -1 indicates failure.
    0 means that the page was successfully submitted to the bitstream.
 
@@ -590,13 +591,13 @@ struct. (http://www.xiph.org/ogg/doc/libogg/ogg_stream_pagein.html)
 This function assembles a data packet for output to the codec decoding engine. 
 The data has already been submitted to the ogg_stream_state and broken into segments. 
 Each successive call returns the next complete packet built from those segments.
-(http://www.xiph.org/ogg/doc/libogg/ogg_stream_packetout.html)
+L<http://www.xiph.org/ogg/doc/libogg/ogg_stream_packetout.html>
 
-@Input:
+-Input:
   ogg_stream_state
   ogg_packet
 
-@Output:
+-Output:
   -1 if we are out of sync and there is a gap in the data.
    0 insufficient data available to complete a packet, or unrecoverable internal error occurred.
    1 if a packet was assembled normally. op contains the next packet from the stream.
@@ -605,13 +606,13 @@ Each successive call returns the next complete packet built from those segments.
 =head2 ogg_stream_packetpeek
 
 This function attempts to assemble a raw data packet and returns it without advancing 
-decoding. (http://www.xiph.org/ogg/doc/libogg/ogg_stream_packetpeek.html)
+decoding. L<http://www.xiph.org/ogg/doc/libogg/ogg_stream_packetpeek.html>
 
-@Input:
+-Input:
   ogg_stream_state
   ogg_packet
 
-@Output:
+-Output:
   -1, no packet available due to lost sync or a hole in the data.
    0, insufficient data available to complete a packet, or on unrecoverable internal error
    1, packet is available
@@ -625,11 +626,11 @@ They're never freed or manipulated directly. You may get a malloc error doing so
 B<oggpack_buffer> struct which is used with libogg's bitpacking functions is not exposed, 
 as you should never need to directly access anything in this structure. So are the
 functions manipulating oggpack_buffer, they too are not exposed. 
-(http://www.xiph.org/ogg/doc/libogg/oggpack_buffer.html)
+L<http://www.xiph.org/ogg/doc/libogg/oggpack_buffer.html>
 
 B<ogg_stream_iovecin>, C<not implemented> as this function submits packet data (in the form of an 
 array of ogg_iovec_t, rather than using an ogg_packet structure) to the bitstream for page 
-encapsulation. (http://www.xiph.org/ogg/doc/libogg/ogg_stream_iovecin.html)
+encapsulation. L<http://www.xiph.org/ogg/doc/libogg/ogg_stream_iovecin.html>
 
 
 =head1 AUTHORS

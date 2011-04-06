@@ -1091,6 +1091,38 @@ XS(XS_Ogg__LibOgg_ogg_stream_packetpeek)
     XSRETURN(1);
 }
 
+
+XS(XS_Ogg__LibOgg_get_ogg_page); /* prototype to pass -Wmissing-prototypes */
+XS(XS_Ogg__LibOgg_get_ogg_page)
+{
+#ifdef dVAR
+    dVAR; dXSARGS;
+#else
+    dXSARGS;
+#endif
+    if (items != 1)
+       croak_xs_usage(cv,  "og");
+    {
+	int	og = (int)SvIV(ST(0));
+#line 1032 "LibOgg.xs"
+    ogg_page *_og;
+#line 1110 "LibOgg.c"
+	HV *	RETVAL;
+#line 1034 "LibOgg.xs"
+    _og = INT2PTR(ogg_page *, og);
+    RETVAL = newHV();
+    sv_2mortal((SV*)RETVAL);	/* convert the hash inside the RETVAL to a mortal */
+    hv_store(RETVAL, "header", strlen("header"), newSVpv((char *)_og->header, _og->header_len), 0);
+    hv_store(RETVAL, "header_len", strlen("header_len"), newSViv(_og->header_len), 0);
+    hv_store(RETVAL, "body", strlen("body"), newSVpv((char *)_og->body, _og->body_len), 0);
+    hv_store(RETVAL, "body_len", strlen("body_len"), newSViv(_og->body_len), 0);
+#line 1120 "LibOgg.c"
+	ST(0) = newRV((SV*)RETVAL);
+	sv_2mortal(ST(0));
+    }
+    XSRETURN(1);
+}
+
 #ifdef __cplusplus
 extern "C"
 #endif
@@ -1148,6 +1180,7 @@ XS(boot_Ogg__LibOgg)
         newXS("Ogg::LibOgg::ogg_stream_pagein", XS_Ogg__LibOgg_ogg_stream_pagein, file);
         newXS("Ogg::LibOgg::ogg_stream_packetout", XS_Ogg__LibOgg_ogg_stream_packetout, file);
         newXS("Ogg::LibOgg::ogg_stream_packetpeek", XS_Ogg__LibOgg_ogg_stream_packetpeek, file);
+        newXS("Ogg::LibOgg::get_ogg_page", XS_Ogg__LibOgg_get_ogg_page, file);
 #if (PERL_REVISION == 5 && PERL_VERSION >= 9)
   if (PL_unitcheckav)
        call_list(PL_scopestack_ix, PL_unitcheckav);
