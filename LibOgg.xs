@@ -1014,7 +1014,7 @@ Functions to manipulate C Structures
 
 =cut
 
-=head1 get_ogg_page
+=head2 get_ogg_page
 
 Gets the data contained in ogg_page and return as a hash reference.
 

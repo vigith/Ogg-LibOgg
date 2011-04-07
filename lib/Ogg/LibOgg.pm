@@ -618,6 +618,24 @@ decoding. L<http://www.xiph.org/ogg/doc/libogg/ogg_stream_packetpeek.html>
    1, packet is available
 
 
+=head1 Functions (Miscellaneous)
+
+Functions to manipulate C Structures
+
+=cut
+
+=head2 get_ogg_page
+
+Gets the data contained in ogg_page and return as a hash reference.
+
+-Input:
+  ogg_page
+
+-Output:
+  hashref
+
+=cut
+
 =head1 CAVEATS
 
 B<ogg_page> and B<ogg_packet> structs mostly point to storage in libvorbis/libtheora. 
